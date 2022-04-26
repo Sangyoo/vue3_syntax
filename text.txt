@@ -1,0 +1,74 @@
+<template>
+  <h1 
+    v-bind:[attr]="'active'"
+    @[event]="add">
+    {{ msg }}
+  </h1>
+  <!-- <h1 
+    @click="add">
+    {{ msg }}
+  </h1>
+  <h2
+    v-once
+    v-html="msg">
+  </h2> -->
+</template>
+
+<script>
+//v-once 일회용, 노반응성
+//v-on:click = @click (약식표현)
+export default {
+  data() {
+    return {
+      msg: 'active',
+      attr: 'class',
+      event: 'click'
+      //이중중괄호(mustache) 안의 내용이 아래와 같이 html문법일 경우
+      //위의 template에 v-html이라는 속성을 추가해주어야 한다.
+      // msg: '<div style="color: red;">Hello!!</div>'
+    }
+  },
+  methods: {
+    add() {
+      this.msg += '!'
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .active {
+    color: royalblue;
+    font-size: 100px;
+  }
+</style>
+--------------------------------vue-클래스와바인딩-----------------------------------------------------
+<template>
+  <h1
+    v-bind:class="{ active : isActive }"
+    @click="activate">Hello?!({{ isActive }})</h1>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+    activate() {
+      this.isActive = true
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .active{
+    color:red;
+    font-weight: bold;
+  }
+</style>
+-------------------------------------------------------------------------------------
+npm i -D shortid : 각 요소들의 id를 만들어주는 패키지
