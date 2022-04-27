@@ -1,58 +1,33 @@
 <template>
-  <button @click="handler">
-    Click me!
-  </button>
-  <ul>
-    <li
-      v-for="{fruit, index} in Fruits"
-      v-bind:key="fruit">
-      {{ fruit }} - {{ index }}</li>
-  </ul>
-
-  <ul>
-    <li
-      v-for="{id, name} in Fruits"
-      v-bind:key="id">
-      {{ name }} - {{ id }}</li>
-  </ul>
-
-  <ul>
-    <li
-      v-for="fruit in newFruits"
-      v-bind:key="fruit.id">
-      {{ fruit.name }} - {{ fruit.id }}
-    </li>
-  </ul>
+  <a
+    href="https://naver.com"
+    target="_blank"
+    @click.prevent.once="handler">
+    Naver
+  </a>
 </template>
 
 <script>
-//npm i -D shortid를 통해 패키지 설치함 : id생성해주는 패키지
-import shortid from 'shortid'
+/*
+@click.prevent ="function" : html 기본동작을 실행하지않고 메소드만 실행
+@click.once = "function": 메소드를 한번만 실행
+*/
 
 export default {
   data() {
     return {
-      fruits:['Apple', 'Banana','Cherry'],
-      /*아래와 같은 결과가 아래의 computed로 인해 만들어진다
-      newFruits: [
-        { id: 0, name: 'Apple'},
-        { id: 1, name: 'Banana'},
-        { id: 2, name: 'Cherry'}
-      ]*/
+
     }
   },
   methods: {
-    handler(){
-      this.fruits.push('Orange')
+    handler(event) {
+      //preventDefault 주소 연결(기본html 기능)을 실행하지 않고 메소드만 실행하겠다.
+      // event.preventDefault()
+      console.log('ABC!')
     }
   },
   computed:{
-    newFruits(){
-      return this.fruits.map(fruit => ({
-        id: shortid.generate(), 
-        name: fruit
-      }))
-    }
+
   }
 }
 </script>
