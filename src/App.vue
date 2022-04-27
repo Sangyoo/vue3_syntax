@@ -1,30 +1,43 @@
 <template>
-  <a
-    href="https://naver.com"
-    target="_blank"
-    @click.prevent.once="handler">
-    Naver
-  </a>
+  <h1>{{ msg }}</h1>
+  <input
+    type="text"
+    v-bind:value="msg"
+    @input="msg = $event.target.value">
+  <input
+    type="checkbox"
+    v-model="checked"
+    name=""
+    id="ss">
+  <label for="ss">{{ checked }}</label>
 </template>
 
 <script>
 /*
-@click.prevent ="function" : html 기본동작을 실행하지않고 메소드만 실행
-@click.once = "function": 메소드를 한번만 실행
+https://kr.vuejs.org/v2/guide/forms.html 폼 입력 바인딩 문서
+그러나 v-model은 한글에는 한박자 느린 반응성을 보여주는데, 그럴 때는 밑에 있는
+v-bind:value와 @input을 활용해야 한다.
 */
 
 export default {
   data() {
     return {
-
+      msg: 'Hello world!',
+      checked: false
     }
   },
   methods: {
-    handler(event) {
-      //preventDefault 주소 연결(기본html 기능)을 실행하지 않고 메소드만 실행하겠다.
-      // event.preventDefault()
-      console.log('ABC!')
+    //위에 @input="handler"와 아래 명령을 조합해서 사용하거나
+    // v-bind:value="msg"
+    // @input="msg=$event.target.value" 이렇게 두줄로 쓰거나
+    // v-model="msg" 로 간소화 가능
+    //->왜 이렇게하나? : input부분에 데이터를 수정하였을 때, vue data에
+    //있는 msg를 수정하는 양방향 데이터 통신을 하기 위함임.
+    handler(event){
+      console.log(event.target.value)
+      this.msg = event.target.value
     }
+    
   },
   computed:{
 
